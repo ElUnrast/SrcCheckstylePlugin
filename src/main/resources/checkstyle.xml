@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+          "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+          "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+  <property name="charset" value="UTF-8"/>
+  <property name="severity" value="warning"/>
+  <property name="fileExtensions" value="java"/>
+
+  <module name="BeforeExecutionExclusionFileFilter">
+    <property name="fileNamePattern" value=".*[\\/]target[\\/].*"/>
+  </module>
+  <module name="BeforeExecutionExclusionFileFilter">
+    <property name="fileNamePattern" value=".*[\\/]SrcModules[\\/]Plain[\\/]Cashflow[\\/]Psd2Client[\\/].*"/>
+  </module>
+  <module name="BeforeExecutionExclusionFileFilter">
+    <property name="fileNamePattern" value=".*[\\/]Snippets[\\/].*"/>
+  </module>
+  <module name="BeforeExecutionExclusionFileFilter">
+    <property name="fileNamePattern" value=".*[\\/]IbanTestfallKatalog[\\/]src[\\/]main[\\/]java[\\/]kops[\\/]Prfzif\\.java"/>
+  </module>
+
+  <module name="FileTabCharacter"><property name="eachLine" value="true"/></module>
+  <module name="LineLength">
+    <property name="max" value="120"/>
+    <property name="ignorePattern" value="^$"/>
+  </module>
+  <module name="RegexpSingleline">
+    <property name="format" value="[ \t]+$"/>
+    <property name="message" value="Trailing whitespace"/>
+  </module>
+
+  <module name="RegexpMultiline">
+    <property name="format" value="(?m)^(?![ \t]*$)(?![ \t]*(?://|/\*|\*|\*/))(?!.*\{[ \t]*$).*[;][ \t]*\n[ \t]*(?:if|for|while|switch)\b[^{\n]*\{[ \t]*$|^(?![ \t]*$)(?![ \t]*(?://|/\*|\*|\*/))(?!.*\{[ \t]*$).*[;][ \t]*\n[ \t]*try\b[^{\n]*\{[ \t]*$"/>
+    <property name="message" value="Vor Block-Statements ist eine Leerzeile erforderlich."/>
+  </module>
+  <module name="RegexpMultiline">
+    <property name="format" value="(?m)^[ \t]*}[ \t]*\n(?![ \t]*$)(?![ \t]*}[ \t]*$)(?![ \t}]*(?:else|catch|finally)\b)(?![ \t]*(?:case\b[^\n]*(?:-&gt;|:)|default\b[^\n]*(?:-&gt;|:)))(?![ \t]*[\)\]\}])(?![ \t]*(?://|/\*|\*|\*/|&quot;|'))(?![ \t]*&quot;&quot;&quot;)[ \t]*[A-Za-z_@]"/>
+    <property name="message" value="Nach Block-Statements ist eine Leerzeile erforderlich."/>
+  </module>
+  <module name="RegexpMultiline">
+    <property name="format" value="(?m)^.*\S.*\n[ \t]*\n[ \t]*(?:case\b[^\n]*(?:-&gt;|:)|default\b[^\n]*(?:-&gt;|:))"/>
+    <property name="message" value="Vor case/default sind keine Leerzeilen erlaubt."/>
+  </module>
+  <module name="RegexpMultiline">
+    <property name="format" value="(?m)^(?![ \t]*(?:package|import)\b).+\n[ \t]*\n[ \t]*\n(?![ \t]*(?:@|public[ \t]+(?:class|interface|enum|record)\b|class\b|interface\b|enum\b|record\b))"/>
+    <property name="message" value="Doppelte Leerzeilen sind nicht erlaubt."/>
+  </module>
+  <module name="RegexpMultiline">
+    <property name="format" value="(?m)^[ \t]*\S.*\n[ \t]*\n[ \t]*\.[A-Za-z_]\S*"/>
+    <property name="message" value="In Aufrufketten sind keine Leerzeilen erlaubt."/>
+  </module>
+
+  <module name="TreeWalker">
+    <module name="MemberName"><property name="format" value="^m_[a-z][A-Za-z0-9]*$"/></module>
+    <module name="StaticVariableName">
+      <property name="format" value="^(?:x|k)_[a-z][A-Za-z0-9]*$"/>
+    </module>
+    <module name="LeftCurly">
+      <property name="option" value="eol"/>
+      <property name="tokens"
+                value="LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO,
+                       LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY,
+                       LITERAL_SWITCH, LITERAL_SYNCHRONIZED,
+                       CTOR_DEF"/>
+    </module>
+    <module name="MethodParamPad">
+      <property name="option" value="nospace"/>
+    </module>
+    <module name="com.src.tools.checkstyle.C_NoWhitespaceBeforeControlParenCheck"/>
+    <module name="com.src.tools.checkstyle.C_ClosingParenOnOwnLineCheck"/>
+    <module name="com.src.tools.checkstyle.C_GenericEndSpacingCheck"/>
+    <module name="ParenPad">
+      <property name="option" value="space"/>
+      <property name="tokens"
+                value="LITERAL_CATCH, LITERAL_FOR, LITERAL_IF, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_WHILE"/>
+    </module>
+    <module name="NoWhitespaceBefore">
+      <property name="tokens" value="COMMA"/>
+    </module>
+    <module name="WhitespaceAfter">
+      <property name="tokens" value="COMMA"/>
+    </module>
+    <module name="RegexpSinglelineJava">
+      <property name="format" value="\b(?:[A-Za-z_][A-Za-z0-9_$.]*)(?:&lt;[^&gt;\n]*&gt;)?\s+\[\s*]"/>
+      <property name="message" value="Zwischen Typ und '[]' ist kein Leerzeichen erlaubt."/>
+    </module>
+    <module name="RegexpSinglelineJava">
+      <property name="format" value="\b[A-Za-z_][A-Za-z0-9_]*&lt;\s+[A-Za-z_?][^&gt;\n]*&gt;"/>
+      <property name="message" value="Nach '&lt;' in Generics ist kein Leerzeichen erlaubt."/>
+    </module>
+    <module name="SuppressionXpathSingleFilter">
+      <property name="id" value="EmptyLineBetweenMethods"/>
+      <property name="query" value="//INTERFACE_DEF/OBJBLOCK/METHOD_DEF[not(./SLIST)]"/>
+    </module>
+    <module name="SuppressionXpathSingleFilter">
+      <property name="id" value="EmptyLineBetweenMethods"/>
+      <property name="query" value="//INTERFACE_DEF/OBJBLOCK/METHOD_DEF[./MODIFIERS/LITERAL_DEFAULT and count(./SLIST/*) &lt;= 3]"/>
+    </module>
+    <module name="EmptyLineSeparator">
+      <property name="id" value="EmptyLineBetweenMethods"/>
+      <property name="allowMultipleEmptyLines" value="false"/>
+      <property name="allowNoEmptyLineBetweenFields" value="true"/>
+      <property name="tokens" value="METHOD_DEF, CTOR_DEF"/>
+    </module>
+    <module name="RightCurly">
+      <property name="id" value="RightCurly"/>
+      <property name="option" value="alone"/>
+    </module>
+    <module name="SuppressionXpathSingleFilter">
+      <property name="id" value="RightCurly"/>
+      <property name="query" value="//METHOD_DEF[./MODIFIERS/LITERAL_DEFAULT]//RCURLY"/>
+    </module>
+  </module>
+</module>
