@@ -15,9 +15,30 @@ fix the safe violations.
 
 ## Usage
 
+The plugin is provided via [JitPack](https://jitpack.io/#ElUnrast/SrcCheckstylePlugin).
+Add this to the `settings.gradle` of the consuming build:
+
+```groovy
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://jitpack.io' }
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if( requested.id.id == 'de.src-gmbh.checkstyle' ) {
+                useModule( 'com.github.ElUnrast:SrcCheckstylePlugin:<version>' )
+            }
+        }
+    }
+}
+```
+
+and apply the plugin in the `build.gradle`:
+
 ```groovy
 plugins {
-    id 'de.src-gmbh.checkstyle' version '<version>'
+    id 'de.src-gmbh.checkstyle'
 }
 ```
 

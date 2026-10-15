@@ -1,10 +1,10 @@
 plugins {
     id 'java-gradle-plugin'
-    id 'com.gradle.plugin-publish' version '1.3.1'
+    id 'maven-publish'
 }
 
 group = 'de.src-gmbh'
-version = '0.1.0'
+version = '0.1.1'
 
 java {
     withSourcesJar()
@@ -31,15 +31,9 @@ dependencies {
 }
 
 gradlePlugin {
-    website = 'https://github.com/ElUnrast/SrcCheckstylePlugin'
-    vcsUrl = 'https://github.com/ElUnrast/SrcCheckstylePlugin.git'
-
     plugins {
         srcCheckstyle {
             id = 'de.src-gmbh.checkstyle'
-            displayName = 'SRC Checkstyle Plugin'
-            description = 'Checks Java code against a bundled Checkstyle rule set and automatically fixes safe style and formatting violations.'
-            tags.set( ['checkstyle', 'java', 'code-style', 'formatting'] )
             implementationClass = 'com.src.gradle.plugins.checkstyle.C_SrcCheckstylePlugin'
         }
     }
