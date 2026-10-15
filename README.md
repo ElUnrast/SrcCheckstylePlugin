@@ -27,7 +27,7 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             if( requested.id.id == 'de.src-gmbh.checkstyle' ) {
-                useModule( 'com.github.ElUnrast:SrcCheckstylePlugin:<version>' )
+                useModule( 'com.github.ElUnrast:SrcCheckstylePlugin:v<version>' )
             }
         }
     }
